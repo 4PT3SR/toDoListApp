@@ -1,6 +1,10 @@
 const Todo = require('../models/toDoList')
 const AppError = require('../utils/AppError');
 
+
+// @DESCRIPTION : ADD A TODO
+// @ROUTE : /todo/add
+// @METHOD: POST
 exports.addTodo = async (req,res,next) => {
     try {
         const {title,description} = req.body
@@ -15,6 +19,11 @@ exports.addTodo = async (req,res,next) => {
     }
 }
 
+
+// @DESCRIPTION : UPDATE A TODO
+// @ROUTE : /todo/update/:id
+// @METHOD: PATCH
+
 exports.update = async (req,res,next) => {
     try {
         const toDo = await Todo.findByIdAndUpdate(req.params.id, req.body,{new:true,runValidators:true,select:'-__v'});
@@ -27,6 +36,10 @@ exports.update = async (req,res,next) => {
     }
 }
 
+// @DESCRIPTION : DELETE A TODO
+// @ROUTE : /todo/delete/:id
+// @METHOD: DELETE
+
 exports.delete = async (req,res,next) => {
     try {
         const toDo = await Todo.findByIdAndDelete(req.params.id);
@@ -38,6 +51,10 @@ exports.delete = async (req,res,next) => {
         next(e);
     }
 }
+
+// @DESCRIPTION :  GET ALL TODOS
+// @ROUTE : /todo
+// @METHOD: GET
 
 exports.allToDos = async (req,res,next) => {
     try {

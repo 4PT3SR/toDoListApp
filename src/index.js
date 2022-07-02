@@ -23,8 +23,11 @@ app.all('*', (req,res,next)=> {
     next(new AppError(`'${req.url}' does not exist`,404));
 })
 
+// GLOBAL ERROR HANDLER
 app.use(globalErrorHandler)
 
+
+// FUNCTION TO START THE APP
 const startApp = async () => {
     try {
         await connectDb(process.env.URI);
